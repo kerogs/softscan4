@@ -1,0 +1,43 @@
+/*
+ * HK13 Theme (v4.3.0)
+ * Theme by Keorgs
+ * https://github.com/kerogs
+ * 
+ * SCSS structure with light and dark mode support.
+ * Future-proof: Adaptive mode can be added later.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap");
+:root {
+  --background: #f5f5f5;
+  --cards: #e4e6e6;
+  --fg: #3a3a3a;
+  --sfg: #494949;
+  --accent: #fd4e2b;
+}
+
+.darktheme, body {
+  --background: #19171a;
+  --cards: #201e21;
+  --fg: #d8dee9;
+  --sfg: #2c292e;
+  --accent: #fd4e2b;
+}
+
+.lighttheme {
+  --background: #f5f5f5;
+  --cards: #e4e6e6;
+  --fg: #3a3a3a;
+  --sfg: #494949;
+  --accent: #fd4e2b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  font-family: "Atkinson Hyperlegible Mono", monospace;
+}/*# sourceMappingURL=style.css.map */
