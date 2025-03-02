@@ -22,6 +22,18 @@ require_once('../config.php');
 
     <header>
         <?php require_once '../inc/header.php' ?>
+
+        <div>
+            <a href="">
+                <img class="logo" src="./src/img/lw.png" alt="">
+            </a>
+            <form action="" class="search" method="get">
+                <div class="inputgroup">
+                    <input type="search" name="search" id="">
+                    <input type="submit" value="">
+                </div>
+            </form>
+        </div>
     </header>
 
     <?php require_once '../inc/script.php' ?>

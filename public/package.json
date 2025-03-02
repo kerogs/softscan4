@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
-    "boxicons": "^2.1.4"
+    "boxicons": "^2.1.4",
+    "lucide-static": "^0.477.0"
   },
   "devDependencies": {
     "typescript": "^5.7.3"

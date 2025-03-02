@@ -40,4 +40,19 @@
 body {
   background-color: var(--background);
   font-family: "Atkinson Hyperlegible Mono", monospace;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+header > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+}
+header > div .logo {
+  height: 45px;
+  width: 45px;
 }/*# sourceMappingURL=style.css.map */
