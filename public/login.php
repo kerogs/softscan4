@@ -114,32 +114,67 @@ if (isset($_POST['password'])) {
 
 <body>
 
-    <div class="topAnimationLoad">
-        <div id="headertohundred"></div>
-    </div>
+    <div class="login">
+        <div class="topAnimationLoad">
+            <div id="headertohundred"></div>
+        </div>
 
-    <div class="ccenter">
-        <i data-lucide="shield-ellipsis"></i>
-        <h1>Login</h1>
-        <form action="" method="post">
-            <label for="password">Clé de connexion</label>
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" id="buttonlogin" onclick="loginAnimation();             document.getElementById('buttonlogin').value = 'Connexion en cours...';" value="Login">
-        </form>
-    </div>
+        <div class="ccenter">
+            <div class="icon">
+                <i data-lucide="shield-ellipsis"></i>
+            </div>
+            <h1>Connexion requise</h1>
+            <form action="" method="post">
+                <div class="inputgroup">
+                    <i data-lucide="key-square"></i>
+                    <input type="password" id="passwordInput" name="password" placeholder="Password" autofocus maxlength="16" minlength="4" required>
+                </div>
+                <button type="submit" id="buttonlogin" onclick="loginAnimation();  document.getElementById('buttonlogin').innerHTML = 'Connexion en cours...';">
+                    Envoyer
+                </button>
+            </form>
+        </div>
 
-    <script>
-        loginAnimation = () => {
-            headertohundred = document.getElementById('headertohundred');
+        <script>
+            loginAnimation = () => {
+                headertohundred = document.getElementById('headertohundred');
 
-            for (let i = 0; i <= 100; i++) {
-                setTimeout(() => {
-                    headertohundred.style.width = i + '%';
-                }, i * 16);
+                for (let i = 0; i <= 100; i++) {
+                    setTimeout(() => {
+                        headertohundred.style.width = i + '%';
+                    }, i * 16);
+                }
             }
-        }
-    </script>
 
+            document.getElementById('passwordInput').addEventListener('input', function() {
+                const password = this.value;
+                const button = document.getElementById('buttonlogin');
+
+                if (password.length >= 4 && password.length <= 16) {
+                    button.classList.add('active');
+                    button.removeAttribute('disabled');
+                } else {
+                    button.classList.remove('active');
+                    button.setAttribute('disabled', 'true');
+                }
+            });
+        </script>
+
+        <div class="background">
+            <div class="dot" title="Dot">
+                <svg>
+                    <defs>
+                        <pattern id="dot-pattern" width="32" height="32" patternUnits="userSpaceOnUse"
+                            patternContentUnits="userSpaceOnUse" x="0" y="0">
+                            <circle cx="16" cy="16" r="1.5"></circle>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" stroke-width="0" fill="url(#dot-pattern)" />
+                </svg>
+            </div>
+        </div>
+
+    </div>
 </body>
 <script>
     lucide.createIcons();

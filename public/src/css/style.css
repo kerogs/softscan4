@@ -12,6 +12,7 @@
   --background-op: rgba(245, 245, 245, 0.6588235294);
   --cards: #e4e6e6;
   --cards-op: rgba(228, 230, 230, 0.1254901961);
+  --cards-alt: #4d4d4d;
   --fg: #3a3a3a;
   --sfg: #494949;
   --accent: #fd4e2b;
@@ -22,6 +23,7 @@
   --background-op: rgba(25, 23, 26, 0.1254901961);
   --cards: #201e21;
   --cards-op: rgba(32, 30, 33, 0.6588235294);
+  --cards-alt: #2e2c2e;
   --fg: #d8dee9;
   --sfg: #b3b8c2;
   --accent: #fd4e2b;
@@ -243,4 +245,124 @@ section .leftTitle {
 }
 .dernierContenu > div {
   flex: 1;
+}
+
+.login .background {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+.login .background div.dot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.login .background div.dot svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  fill: var(--cards-alt);
+  -webkit-mask-image: radial-gradient(white, transparent 85%);
+          mask-image: radial-gradient(white, transparent 85%);
+}
+.login .ccenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  background: var(--background);
+  border: 1px solid var(--cards);
+  border-radius: 16px;
+}
+.login .ccenter .icon {
+  border: 1px solid var(--cards-alt);
+  border-radius: 100%;
+  padding: 10px;
+  margin: 0 auto;
+  position: relative;
+  height: 64px;
+  width: 64px;
+  background-color: var(--background);
+  z-index: 2;
+}
+.login .ccenter .icon::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  background-color: var(--accent);
+  border-radius: 100%;
+  z-index: -1;
+}
+.login .ccenter .icon svg,
+.login .ccenter .icon i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 36px;
+  width: 36px;
+}
+.login .ccenter h1 {
+  color: var(--fg);
+  font-size: 20px;
+  margin: 12px 0;
+}
+.login .ccenter form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+  transition: 0.4s;
+}
+.login .ccenter form .inputgroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cards);
+  border-radius: 3px;
+  padding: 6px 12px;
+  gap: 9px;
+}
+.login .ccenter form .inputgroup input {
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  flex: 1;
+  color: var(--fg);
+  font-size: 20px;
+}
+.login .ccenter form button {
+  z-index: -99;
+  cursor: pointer;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: 0.3s;
+  background: var(--accent);
+  padding: 6px 0;
+  border-radius: 3px;
+  color: var(--fg);
+  font-size: 20px;
+  border: none;
+  height: 0;
+}
+.login .ccenter form button.active {
+  z-index: 1;
+  cursor: pointer;
+  transform: translateY(0);
+  opacity: 1;
+  height: auto;
+}
+.login .ccenter form button:hover {
+  opacity: 0.6;
 }/*# sourceMappingURL=style.css.map */
