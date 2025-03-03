@@ -2,6 +2,7 @@
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
     "boxicons": "^2.1.4",
+    "lucide": "^0.477.0",
     "lucide-static": "^0.477.0"
   },
   "devDependencies": {

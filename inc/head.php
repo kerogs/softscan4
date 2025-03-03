@@ -38,3 +38,5 @@
         navigator.serviceWorker.register('sw.js');
     };
 </script> -->
+
+<script src="./node_modules/lucide/dist/umd/lucide.js"></script>

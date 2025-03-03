@@ -9,7 +9,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&display=swap");
 :root {
   --background: #f5f5f5;
+  --background-op: rgba(245, 245, 245, 0.6588235294);
   --cards: #e4e6e6;
+  --cards-op: rgba(228, 230, 230, 0.1254901961);
   --fg: #3a3a3a;
   --sfg: #494949;
   --accent: #fd4e2b;
@@ -17,15 +19,19 @@
 
 .darktheme, body {
   --background: #19171a;
+  --background-op: rgba(25, 23, 26, 0.1254901961);
   --cards: #201e21;
+  --cards-op: rgba(32, 30, 33, 0.6588235294);
   --fg: #d8dee9;
-  --sfg: #2c292e;
+  --sfg: #b3b8c2;
   --accent: #fd4e2b;
 }
 
 .lighttheme {
   --background: #f5f5f5;
+  --background-op: rgba(245, 245, 245, 0.6588235294);
   --cards: #e4e6e6;
+  --cards-op: rgba(228, 230, 230, 0.1254901961);
   --fg: #3a3a3a;
   --sfg: #494949;
   --accent: #fd4e2b;
@@ -39,12 +45,21 @@
 
 body {
   background-color: var(--background);
+  color: var(--fg);
   font-family: "Atkinson Hyperlegible Mono", monospace;
 }
 
 header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 4040;
+  border-bottom: 1px solid var(--background);
+  background: var(--background-op);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: space-between;
 }
 header > div {
   display: flex;
@@ -55,4 +70,177 @@ header > div {
 header > div .logo {
   height: 45px;
   width: 45px;
+}
+header > div .inputgroup {
+  display: flex;
+  align-items: center;
+  background: var(--cards-op);
+  font-size: 16px;
+  border-radius: 99px;
+  padding: 6px 12px;
+  gap: 9px;
+  border: 1px solid var(--cards);
+  filter: drop-shadow(0px 1px 6px rgba(0, 0, 0, 0.25));
+}
+header > div .inputgroup input,
+header > div .inputgroup button {
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+}
+header > div .inputgroup input {
+  width: 170px;
+  color: var(--fg);
+}
+header > div .inputgroup button {
+  cursor: pointer;
+}
+header > div .inputgroup button svg {
+  height: 17px;
+  width: 17px;
+  stroke: var(--fg);
+}
+
+.main-content {
+  display: flex;
+}
+.main-content main,
+.main-content aside {
+  flex-shrink: 0;
+}
+.main-content main {
+  flex: 1;
+  background-color: var(--background-op);
+}
+.main-content aside {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+  border-right: 1px solid var(--cards);
+  background: var(--cards-op);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: 0.4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.main-content aside.little {
+  width: 80px;
+}
+.main-content aside .title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.4s;
+  text-align: center;
+  margin-top: 3px;
+}
+.main-content aside .title img {
+  height: 35px;
+  width: 35px;
+}
+.main-content aside .title h1 {
+  color: var(--fg);
+  font-size: 20px;
+}
+.main-content aside hr {
+  border: 1px solid var(--background);
+}
+.main-content aside nav {
+  padding: 20px;
+  flex: 1;
+}
+.main-content aside nav a {
+  text-decoration: none;
+  color: var(--sfg);
+}
+.main-content aside nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.main-content aside nav ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 0;
+}
+.main-content aside nav ul li svg {
+  height: 19px;
+  width: 19px;
+}
+.main-content aside nav ul li:hover {
+  color: var(--fg);
+}
+.main-content aside nav ul li.active {
+  color: var(--accent);
+}
+.main-content aside .version {
+  text-align: center;
+  padding: 5px 0;
+  font-size: 12px;
+}
+
+#mainCoverImageBackground {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 87vw;
+  height: 75vh;
+  filter: blur(100px);
+  z-index: -1;
+}
+
+#homeSlider {
+  height: 60vh;
+  overflow: hidden;
+}
+#homeSlider li .content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#homeSlider li .content .mainCoverImage {
+  width: 100%;
+  height: 60vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#homeSlider li .content .filterGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--background-op) 0%, var(--background) 98%);
+}
+
+main .inn {
+  background-color: var(--background);
+}
+
+section {
+  padding: 20px;
+}
+section .leftTitle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+}
+
+.dernierContenu {
+  display: flex;
+  gap: 20px;
+}
+.dernierContenu > div {
+  flex: 1;
 }/*# sourceMappingURL=style.css.map */
