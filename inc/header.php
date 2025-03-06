@@ -1,6 +1,4 @@
-<header>
-    <?php require_once '../inc/header.php' ?>
-
+<header class="<?=  $filename == "index.php" ? "absolute" : "" ?>">
     <div>
         <form action="" class="search" method="get">
             <div class="inputgroup">

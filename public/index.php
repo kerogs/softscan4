@@ -27,86 +27,85 @@ require_once('../config.php');
     <div class="main-content">
 
         <img id="mainCoverImageBackground" src="https://placewaifu.com/image/1920/1080" alt="">
-
-        <aside>
-            <div class="title">
-                <img src="./src/img/lw.png" alt="">
-                <h1>SoftScan 4</h1>
-            </div>
-            <nav>
-                <ul>
-                    <a href="" class="active">
-                        <li class="active"><i data-lucide="home"></i> Accueil</li>
-                    </a>
-                    <a href="">
-                        <li><i data-lucide="gallery-vertical-end"></i> Catégories</li>
-                    </a>
-                    <a href="">
-                        <li><i data-lucide="compass"></i> Découvrir</li>
-                    </a>
-                    <a href="">
-                        <li><i data-lucide="image"></i> Images</li>
-                    </a>
-                    <a href="">
-                        <li><i data-lucide="video"></i> Vidéos</li>
-                    </a>
-                </ul>
-            </nav>
-            <div class="info">
-                <p class="version">
-                    v<?= $kpf_config["other"]["website_version"] ?>
-                </p>
-            </div>
-        </aside>
+        <?php require_once __DIR__ . '/../inc/aside.php' ?>
         <main>
 
-            <?php require_once __DIR__.'/../inc/header.php' ?>
+            <?php require_once __DIR__ . '/../inc/header.php' ?>
 
             <div class="splide" id="homeSlider">
                 <div class="splide__track">
                     <ul class="splide__list">
-                        <li class="splide__slide">
-                            <div class="content">
-                                <img class="mainCoverImage" src="https://placewaifu.com/image/1920/1080" alt="">
-                                <div class="filterGradient"></div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="content">
-                                <img class="mainCoverImage" src="https://placewaifu.com/image/1420/1080" alt="">
-                                <div class="filterGradient"></div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="content">
-                                <img class="mainCoverImage" src="https://placewaifu.com/image/1420/1080" alt="">
-                                <div class="filterGradient"></div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="content">
-                                <img class="mainCoverImage" src="https://placewaifu.com/image/1000/1080" alt="">
-                                <div class="filterGradient"></div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="content">
-                                <img class="mainCoverImage" src="https://placewaifu.com/image/1420/1030" alt="">
-                                <div class="filterGradient"></div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="content">
-                                <img class="mainCoverImage" src="https://placewaifu.com/image/1230/1080" alt="">
-                                <div class="filterGradient"></div>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="content">
-                                <img class="mainCoverImage" src="https://placewaifu.com/image/2420/1080" alt="">
-                                <div class="filterGradient"></div>
-                            </div>
-                        </li>
+                        <?php for ($i = 0; $i < 5; $i++) : ?>
+                            <li class="splide__slide">
+                                <div class="content">
+                                    <div class="topleft">
+                                        <div class="stats">
+                                            <a href="/gif"><span><i data-lucide="image-play"></i> GIF</span></a>
+                                            <span><i data-lucide="eye"></i> 1232</span>
+                                            <span><i data-lucide="heart"></i> 58</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottomleft">
+                                        <div class="buttons">
+                                            <a href="">
+                                                <button class="primary"><i data-lucide="book-open-text"></i> Voir</button>
+                                            </a>
+                                            <a href="">
+                                                <button><i data-lucide="square-arrow-out-up-right"></i> Ouvrir seul</button>
+                                            </a>
+                                            <a href="">
+                                                <button><i data-lucide="download"></i> Telecharger</button>
+                                            </a>
+                                            <a href="">
+                                                <button><i data-lucide="link-2"></i> URL</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <div class="category">
+                                            <a href="">
+                                                <div class="category__item">
+                                                    <img src="https://placeholderimage.eu/api/50/50" alt="">
+                                                    <div class="info">
+                                                        <p class="name">TitreCollections</p>
+                                                        <p class="numberContents">123 Contenus</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="">
+                                                <div class="category__item">
+                                                    <img src="https://placeholderimage.eu/api/50/50" alt="">
+                                                    <div class="info">
+                                                        <p class="name">TitreCollections</p>
+                                                        <p class="numberContents">123 Contenus</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="">
+                                                <div class="category__item">
+                                                    <img src="https://placewaifu.com/image/50/50" alt="">
+                                                    <div class="info">
+                                                        <p class="name">TitreCollections</p>
+                                                        <p class="numberContents">123 Contenus</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="">
+                                                <div class="category__item">
+                                                    <img src="https://placewaifu.com/image/50/50" alt="">
+                                                    <div class="info">
+                                                        <p class="name">TitreCollections</p>
+                                                        <p class="numberContents">123 Contenus</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <img class="mainCoverImage" src="https://placeholderimage.eu/api/<?= rand(800, 1200) ?>/<?= rand(400, 600) ?>" alt="">
+                                    <div class="filterGradient"></div>
+                                </div>
+                            </li>
+                        <?php endfor; ?>
                     </ul>
                 </div>
             </div>
@@ -167,8 +166,8 @@ require_once('../config.php');
                 </section>
                 <section>
                     <div class="leftTitle">
-                        <i data-lucide="image-plus"></i>
-                        <h3>Derniers contenu ajouté</h3>
+                        <i data-lucide="shuffle"></i>
+                        <h3>Proposition d'image</h3>
                     </div>
                 </section>
                 <section>
@@ -177,9 +176,23 @@ require_once('../config.php');
                         <h3>Dernières catégorie ajouté</h3>
                     </div>
                 </section>
+                <section class="category">
+                    <div class="leftTitle">
+                        <i data-lucide="image-plus"></i>
+                        <h3>Derniers contenu ajouté</h3>
+                    </div>
+                    <div class="categorybox">
+                        <a href="">
+                            <div class="categorybox__item">
+                                <img src="https://placeholderimage.eu/api/<?=  rand(800, 1200) ?>/<?= rand(400, 600) ?>" alt="">
+
+                            </div>
+                        </a>
+                    </div>
+                </section>
                 <section>
                     <div class="leftTitle">
-                        <i data-lucide="package-plus"></i>
+                        <i data-lucide="package"></i>
                         <h3>Catégories</h3>
                     </div>
                 </section>

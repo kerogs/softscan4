@@ -1,5 +1,5 @@
 /*
- * HK13 Theme (v4.3.0)
+ * HK13 Theme (v4.4.0)
  * Theme by Keorgs
  * https://github.com/kerogs
  * 
@@ -16,6 +16,9 @@
   --fg: #3a3a3a;
   --sfg: #494949;
   --accent: #fd4e2b;
+  --red: #f65d46;
+  --blue: hsl(217, 100%, 50%);
+  --green: #7ef646;
 }
 
 .darktheme, body {
@@ -27,6 +30,9 @@
   --fg: #d8dee9;
   --sfg: #b3b8c2;
   --accent: #fd4e2b;
+  --red: #f65d46;
+  --blue: hsl(217, 100%, 50%);
+  --green: #7ef646;
 }
 
 .lighttheme {
@@ -37,6 +43,9 @@
   --fg: #3a3a3a;
   --sfg: #494949;
   --accent: #fd4e2b;
+  --red: #f65d46;
+  --blue: hsl(217, 100%, 50%);
+  --green: #7ef646;
 }
 
 * {
@@ -58,10 +67,14 @@ header {
   z-index: 4040;
   border-bottom: 1px solid var(--background);
   background: var(--background-op);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: 100%;
   display: flex;
   justify-content: space-between;
+}
+header.absolute {
+  position: absolute;
 }
 header > div {
   display: flex;
@@ -114,6 +127,7 @@ header > div .inputgroup button svg {
 .main-content main {
   flex: 1;
   background-color: var(--background-op);
+  position: relative;
 }
 .main-content aside {
   position: sticky;
@@ -223,6 +237,180 @@ header > div .inputgroup button svg {
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, var(--background-op) 0%, var(--background) 98%);
+  pointer-events: none;
+}
+#homeSlider li .topleft {
+  position: absolute;
+  top: 70px;
+  left: 50px;
+  z-index: 3;
+}
+#homeSlider li .topleft .stats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+#homeSlider li .topleft .stats a {
+  text-decoration: none;
+  color: var(--fg);
+  opacity: 1;
+}
+#homeSlider li .topleft .stats a span {
+  background-color: var(--blue);
+}
+#homeSlider li .topleft .stats a:hover span {
+  opacity: 0.6;
+}
+#homeSlider li .topleft .stats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  background-color: var(--cards);
+  border-radius: 99px;
+}
+#homeSlider li .topleft .stats span i, #homeSlider li .topleft .stats span svg {
+  height: 16px;
+  width: 16px;
+}
+#homeSlider li .right {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  z-index: 3;
+  color: var(--fg);
+  font-size: 12px;
+}
+#homeSlider li .right .category {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 4;
+}
+#homeSlider li .right .category a {
+  text-decoration: none;
+  color: var(--fg);
+}
+#homeSlider li .right .category__item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 330px;
+  border-radius: 99px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 9px;
+  background-color: var(--cards-op);
+  border: 1px solid var(--cards);
+  overflow: hidden;
+  transition: 0.4s;
+}
+#homeSlider li .right .category__item img {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#homeSlider li .right .category__item .info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+#homeSlider li .right .category__item .info p.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  transition: 0.4s;
+}
+#homeSlider li .right .category__item .info p.numberContents {
+  font-size: 10px;
+  color: var(--sfg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+}
+#homeSlider li .right .category__item:hover {
+  border: 1px solid var(--accent);
+}
+#homeSlider li .right .category__item:hover .info p.name {
+  color: var(--accent);
+}
+#homeSlider li .bottomleft {
+  width: 100%;
+}
+#homeSlider li .bottomleft .buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  z-index: 3;
+}
+#homeSlider li .bottomleft .buttons a {
+  text-decoration: none;
+  cursor: pointer;
+}
+#homeSlider li .bottomleft .buttons button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  padding: 9px 12px;
+  border-radius: 9px;
+  border: none;
+  background-color: var(--cards-op);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: 0.4s;
+  color: var(--fg);
+  font-size: 16px;
+}
+#homeSlider li .bottomleft .buttons button.primary {
+  background-color: var(--accent);
+  color: var(--background);
+}
+#homeSlider li .bottomleft .buttons button i, #homeSlider li .bottomleft .buttons button svg {
+  height: 16px;
+  width: 16px;
+}
+#homeSlider li .bottomleft .buttons button:hover {
+  opacity: 0.6;
+}
+#homeSlider .splide__arrow {
+  background-color: var(--cards);
+  opacity: 1;
+  height: 50px;
+  border-radius: 99px;
+  font-size: 12px;
+}
+#homeSlider .splide__arrow svg {
+  fill: var(--fg);
+}
+#homeSlider .splide__arrow:hover {
+  background-color: var(--accent);
+}
+#homeSlider .splide__pagination .splide__pagination__page {
+  width: 19px;
+  height: 9px;
+  background-color: var(--fg);
+  border-radius: 99px;
+  opacity: 1;
+  transition: 0.6s;
+}
+#homeSlider .splide__pagination .splide__pagination__page.is-active {
+  width: 35px;
+  transform: scale(1);
+  background-color: var(--accent);
 }
 
 main .inn {
@@ -294,15 +482,6 @@ section .leftTitle {
   background-color: var(--background);
   z-index: 2;
 }
-.login .ccenter .icon::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  background-color: var(--accent);
-  border-radius: 100%;
-  z-index: -1;
-}
 .login .ccenter .icon svg,
 .login .ccenter .icon i {
   position: absolute;
@@ -365,4 +544,25 @@ section .leftTitle {
 }
 .login .ccenter form button:hover {
   opacity: 0.6;
+}
+
+section.category .categorybox {
+  display: flex;
+}
+section.category .categorybox__item {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  background-color: red;
+  border-radius: 5px;
+  overflow: hidden;
+}
+section.category .categorybox__item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=style.css.map */

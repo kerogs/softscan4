@@ -1,5 +1,5 @@
 /*
- * HK13 Theme (v4.3.0)
+ * HK13 Theme (v4.4.0)
  * Theme by Keorgs
  * https://github.com/kerogs
  * 
@@ -51,6 +51,9 @@ $green: #7ef646;
 	--fg: #{$light-text};
 	--sfg: #{$light-secondary-text};
 	--accent: #{$light-accent};
+	--red: #{$red};
+	--blue: #{$blue};
+	--green: #{$green};
 }
 
 // Dark Mode Support
@@ -63,6 +66,9 @@ $green: #7ef646;
 	--fg: #{$dark-text};
 	--sfg: #{$dark-secondary-text};
 	--accent: #{$dark-accent};
+	--red: #{$red};
+	--blue: #{$blue};
+	--green: #{$green};
 }
 
 .lighttheme {
@@ -73,6 +79,9 @@ $green: #7ef646;
 	--fg: #{$light-text};
 	--sfg: #{$light-secondary-text};
 	--accent: #{$light-accent};
+	--red: #{$red};
+	--blue: #{$blue};
+	--green: #{$green};
 }
 
 // Future Adaptive Mode (To be implemented later)

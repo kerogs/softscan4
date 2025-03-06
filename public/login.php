@@ -51,25 +51,18 @@ require '../vendor/autoload.php';
 use Dotenv\Dotenv;
 
 // ? check if .env exists, if not, create it and set default password with hash.
-if (!file_exists("../.env")) {
-    file_put_contents("../.env", 'KEY_ACCESS=$2y$10$ctTRFAaSpHWhjJ.4D63Zi.bTM5h4lka9hDyuytXJYI/ge/stLJ1QO ' . "\n" . 'CRYPT_KEY=' . uniqid());
+$dotenv = Dotenv::createImmutable(__DIR__.'/../');
+$dotenv->load();
 
-    header("location: ./login?err=1");
-    exit();
-} else {
-    $dotenv = Dotenv::createImmutable('../');
-    $dotenv->load();
-}
-
-$KEY_ACCESS = $_ENV['KEY_ACCESS'];
+$ADMIN_PASSWORD = $_ENV['ADMIN_PASSWORD'];
 
 if (isset($_POST['password'])) {
 
     $password = htmlentities($_POST['password']);
 
-    if ($password == password_verify($password, $KEY_ACCESS)) {
+    if ($password == password_verify($password, $ADMIN_PASSWORD)) {
 
-        $_SESSION['keyaccess'] = $KEY_ACCESS;
+        $_SESSION['keyaccess'] = $ADMIN_PASSWORD;
         if (isset($_GET['redirect'])) {
             header('Location: ' . $_GET['redirect']);
         } else {

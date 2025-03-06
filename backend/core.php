@@ -10,7 +10,7 @@ session_start();
 // ? Check lastest version framework KPF
 
 // ? Debug mode (1 = on, 0 = off)
-const KPF_DEBUG_MODE = 1;
+const KPF_DEBUG_MODE = 0;
 if (KPF_DEBUG_MODE) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -29,7 +29,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->safeLoad();
 
 // check if path not contain "/action/"
-if (!$_SESSION['keyaccess'] || $_SESSION['keyaccess'] != $_ENV['KEY_ACCESS']) {
+if (!$_SESSION['keyaccess'] || $_SESSION['keyaccess'] != $_ENV['ADMIN_PASSWORD']) {
     header('Location: /login?redirect=' . $_SERVER['REQUEST_URI']);
     exit();
 }
@@ -66,3 +66,5 @@ if ($srvConfigJSON['allow'] === "INTRANET") {
         exit("403 Forbidden - INTRANET access only");
     }
 }
+
+$filename = basename($_SERVER['PHP_SELF']);
