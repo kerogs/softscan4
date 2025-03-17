@@ -2,6 +2,11 @@
 
 require_once('../config.php');
 
+// active error
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Connexion à la base de données tree.db
 $dbTree = new SQLite3(__DIR__ . '/../backend/db/tree.db');
 
@@ -17,6 +22,8 @@ $slides = [];
 while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
     $slides[] = $row;
 }
+
+$dbTree->close();
 
 ?>
 
@@ -165,6 +172,36 @@ while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
             </script>
 
 
+            <?php
+            // Connexion à la base de données tree.db
+            $dbTree = new SQLite3(__DIR__ . '/../backend/db/tree.db');
+
+            // Récupérer les 12 dernières catégories avec des ajouts
+            $latestCategoriesQuery = $dbTree->query("
+                SELECT folder_path, MAX(added_date) as last_added 
+                FROM files 
+                GROUP BY folder_path 
+                ORDER BY last_added DESC 
+                LIMIT 24
+            ");
+            $latestCategories = [];
+            while ($row = $latestCategoriesQuery->fetchArray(SQLITE3_ASSOC)) {
+                $latestCategories[] = $row;
+            }
+
+            // Récupérer 20 catégories aléatoires
+            $randomCategoriesQuery = $dbTree->query("
+                SELECT DISTINCT folder_path 
+                FROM files 
+                ORDER BY RANDOM() 
+                LIMIT 30
+            ");
+            $randomCategories = [];
+            while ($row = $randomCategoriesQuery->fetchArray(SQLITE3_ASSOC)) {
+                $randomCategories[] = $row;
+            }
+            ?>
+
             <div class="inn">
                 <section>
                     <div class="dernierContenu">
@@ -189,16 +226,34 @@ while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
                         <h3>Proposition d'image</h3>
                     </div>
                 </section>
-                <section>
+                <section class="category">
                     <div class="leftTitle">
                         <i data-lucide="package-plus"></i>
-                        <h3>Dernières catégorie ajouté</h3>
+                        <h3>Dernières catégories ajoutées</h3>
+                    </div>
+                    <div class="categorybox">
+                        <?php foreach ($latestCategories as $category) : ?>
+                            <?php
+                            // Récupérer le nom de la catégorie (dernier dossier du chemin)
+                            $categoryName = basename($category['folder_path']);
+                
+                            if($categoryName == "public" || $categoryName == "") {
+                                $categoryName = "public_data";
+                            }
+                            
+                            ?>
+                            <a href="/category?path=<?= $category['folder_path'] ?>">
+                                <div class="categorybox__item">
+                                    <p class="name"><?= $categoryName ?></p>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
                 </section>
                 <section>
                     <div class="leftTitle">
                         <i data-lucide="image-plus"></i>
-                        <h3>Derniers contenu ajouté</h3>
+                        <h3>Derniers contenus ajoutés</h3>
                     </div>
                 </section>
                 <!-- Catégories -->
@@ -208,11 +263,20 @@ while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
                         <h3>Catégories</h3>
                     </div>
                     <div class="categorybox">
-                        <a href="">
-                            <div class="categorybox__item">
-                                <img src="https://placeholderimage.eu/api/<?= rand(800, 1200) ?>/<?= rand(400, 600) ?>" alt="">
-                            </div>
-                        </a>
+                        <?php foreach ($randomCategories as $category) : ?>
+                            <?php
+                            // Récupérer le nom de la catégorie (dernier dossier du chemin)
+                            $categoryName = basename($category['folder_path']);
+                            if($categoryName == "public" || $categoryName == "") {
+                                $categoryName = "public_data";
+                            }
+                            ?>
+                            <a href="/category?path=<?= $category['folder_path'] ?>">
+                                <div class="categorybox__item">
+                                    <p class="name"><?= $categoryName ?></p>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
                     </div>
                 </section>
             </div>

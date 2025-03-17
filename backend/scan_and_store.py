@@ -83,9 +83,9 @@ CREATE TABLE IF NOT EXISTS statistics (
 
 # Fonction pour déterminer la classification d'un fichier
 def get_classification(file_format):
-    if file_format.lower() in ['jpg', 'png', 'webp']:
+    if file_format.lower() in ['jpg', 'jpeg', 'png', 'webp', "svg"]:
         return "image"
-    elif file_format.lower() in ['mp4', 'webm']:
+    elif file_format.lower() in ['mp4', 'webm', "mkv", 'mov', 'avi']:
         return "vidéo"
     elif file_format.lower() == 'gif':
         return "gif"
