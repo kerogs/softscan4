@@ -68,3 +68,8 @@ if ($srvConfigJSON['allow'] === "INTRANET") {
 }
 
 $filename = basename($_SERVER['PHP_SELF']);
+
+
+
+// ! check if DB exists
+require_once __DIR__ . '/php2py.php';

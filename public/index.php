@@ -2,6 +2,22 @@
 
 require_once('../config.php');
 
+// Connexion à la base de données tree.db
+$dbTree = new SQLite3(__DIR__ . '/../backend/db/tree.db');
+
+// Récupérer 5 images aléatoires
+$query = $dbTree->query("
+    SELECT * FROM files 
+    WHERE classification = 'image' 
+    ORDER BY RANDOM() 
+    LIMIT 5
+");
+
+$slides = [];
+while ($row = $query->fetchArray(SQLITE3_ASSOC)) {
+    $slides[] = $row;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -35,77 +51,80 @@ require_once('../config.php');
             <div class="splide" id="homeSlider">
                 <div class="splide__track">
                     <ul class="splide__list">
-                        <?php for ($i = 0; $i < 5; $i++) : ?>
+                        <?php foreach ($slides as $slide) : ?>
+                            <?php
+                            // Récupérer les sous-dossiers (catégories)
+                            $folderPath = $slide['folder_path'];
+                            $categories = array_filter(explode('\\', $folderPath)); // Séparer le chemin en sous-dossiers
+                            $categories = array_slice($categories, -5); // Limiter à 5 sous-dossiers
+                            ?>
                             <li class="splide__slide">
                                 <div class="content">
                                     <div class="topleft">
                                         <div class="stats">
-                                            <a href="/gif"><span><i data-lucide="image-play"></i> GIF</span></a>
-                                            <span><i data-lucide="eye"></i> 1232</span>
-                                            <span><i data-lucide="heart"></i> 58</span>
+                                            <a href="/gif"><span><i data-lucide="image-play"></i> <?= ucfirst($slide['classification']) ?></span></a>
+                                            <span><i data-lucide="eye"></i> <?= $slide['views'] ?></span>
+                                            <span><i data-lucide="heart"></i> <?= $slide['likes'] ?></span>
                                         </div>
                                     </div>
                                     <div class="bottomleft">
                                         <div class="buttons">
-                                            <a href="">
+                                            <a href="view?id=<?= $slide['id'] ?>">
                                                 <button class="primary"><i data-lucide="book-open-text"></i> Voir</button>
                                             </a>
-                                            <a href="">
+                                            <a href="public_data/<?= $slide['full_path'] ?>" target="_blank">
                                                 <button><i data-lucide="square-arrow-out-up-right"></i> Ouvrir seul</button>
                                             </a>
-                                            <a href="">
-                                                <button><i data-lucide="download"></i> Telecharger</button>
+                                            <a href="public_data/<?= $slide['full_path'] ?>" target="_blank" download>
+                                                <button><i data-lucide="download"></i> Télécharger</button>
                                             </a>
-                                            <a href="">
+                                            <!-- <a href="">
                                                 <button><i data-lucide="link-2"></i> URL</button>
-                                            </a>
+                                            </a> -->
                                         </div>
                                     </div>
                                     <div class="right">
                                         <div class="category">
-                                            <a href="">
-                                                <div class="category__item">
-                                                    <img src="https://placeholderimage.eu/api/50/50" alt="">
-                                                    <div class="info">
-                                                        <p class="name">TitreCollections</p>
-                                                        <p class="numberContents">123 Contenus</p>
+                                            <?php
+                                            // Récupérer les sous-dossiers (catégories)
+                                            $folderPath = $slide['folder_path'];
+                                            $categories = array_filter(explode('\\', $folderPath)); // Séparer le chemin en sous-dossiers
+                                            $categories = array_slice($categories, -5); // Limiter à 5 sous-dossiers
+
+                                            // Chemin de base pour les catégories
+                                            $basePath = "public_data/";
+
+                                            // Parcourir chaque catégorie
+                                            foreach ($categories as $index => $category) :
+                                                // Construire le chemin complet de la catégorie
+                                                $fullCategoryPath = $basePath . implode('\\', array_slice($categories, 0, $index + 1));
+
+                                                // Récupérer une image aléatoire dans la catégorie
+                                                $categoryImages = array_merge(
+                                                    glob("$fullCategoryPath/*.jpg"),
+                                                    glob("$fullCategoryPath/*.png"),
+                                                    glob("$fullCategoryPath/*.webp")
+                                                );
+                                                $categoryImage = !empty($categoryImages) ? $categoryImages[array_rand($categoryImages)] : 'src/img/default/placehold.jpg';
+                                            ?>
+                                                <a href="/category?path=<?= $fullCategoryPath ?>">
+                                                    <div class="category__item">
+                                                        <img src="<?= $categoryImage ?>" alt="">
+                                                        <div class="info">
+                                                            <p class="name"><?= $category ?></p>
+                                                            <!-- <p class="numberContents"><?= $fullCategoryPath ?></p> -->
+                                                            <p>Catégorie</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                            <a href="">
-                                                <div class="category__item">
-                                                    <img src="https://placeholderimage.eu/api/50/50" alt="">
-                                                    <div class="info">
-                                                        <p class="name">TitreCollections</p>
-                                                        <p class="numberContents">123 Contenus</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="">
-                                                <div class="category__item">
-                                                    <img src="https://placewaifu.com/image/50/50" alt="">
-                                                    <div class="info">
-                                                        <p class="name">TitreCollections</p>
-                                                        <p class="numberContents">123 Contenus</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="">
-                                                <div class="category__item">
-                                                    <img src="https://placewaifu.com/image/50/50" alt="">
-                                                    <div class="info">
-                                                        <p class="name">TitreCollections</p>
-                                                        <p class="numberContents">123 Contenus</p>
-                                                    </div>
-                                                </div>
-                                            </a>
+                                                </a>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
-                                    <img class="mainCoverImage" src="https://placeholderimage.eu/api/<?= rand(800, 1200) ?>/<?= rand(400, 600) ?>" alt="">
+                                    <img class="mainCoverImage" src="public_data/<?= $slide['full_path'] ?>" alt="">
                                     <div class="filterGradient"></div>
                                 </div>
                             </li>
-                        <?php endfor; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
@@ -176,24 +195,24 @@ require_once('../config.php');
                         <h3>Dernières catégorie ajouté</h3>
                     </div>
                 </section>
-                <section class="category">
+                <section>
                     <div class="leftTitle">
                         <i data-lucide="image-plus"></i>
                         <h3>Derniers contenu ajouté</h3>
                     </div>
-                    <div class="categorybox">
-                        <a href="">
-                            <div class="categorybox__item">
-                                <img src="https://placeholderimage.eu/api/<?=  rand(800, 1200) ?>/<?= rand(400, 600) ?>" alt="">
-
-                            </div>
-                        </a>
-                    </div>
                 </section>
-                <section>
+                <!-- Catégories -->
+                <section class="category">
                     <div class="leftTitle">
                         <i data-lucide="package"></i>
                         <h3>Catégories</h3>
+                    </div>
+                    <div class="categorybox">
+                        <a href="">
+                            <div class="categorybox__item">
+                                <img src="https://placeholderimage.eu/api/<?= rand(800, 1200) ?>/<?= rand(400, 600) ?>" alt="">
+                            </div>
+                        </a>
                     </div>
                 </section>
             </div>

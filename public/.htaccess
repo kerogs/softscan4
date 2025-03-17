@@ -3,3 +3,4 @@ ErrorDocument 404 /error/404.php
 RewriteEngine On
 
 RewriteRule ^login$ login.php
+RewriteRule ^parametres$ parametres.php

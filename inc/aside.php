@@ -5,7 +5,7 @@
     </div>
     <nav>
         <ul>
-            <a href="" class="<?= $filename == "index.php" ? "active" : "" ?>">
+            <a href="/" class="<?= $filename == "index.php" ? "active" : "" ?>">
                 <li class="active"><i data-lucide="home"></i> Accueil</li>
             </a>
             <a href="">
@@ -19,6 +19,10 @@
             </a>
             <a href="">
                 <li><i data-lucide="video"></i> Vidéos</li>
+            </a>
+            <hr>
+            <a href="/parametres" class="<?= $filename == "parametres.php" ? "active" : "" ?>">
+                <li><i data-lucide="settings"></i> Paramètres</li>
             </a>
         </ul>
     </nav>

@@ -24,7 +24,7 @@ labs:
 
 # Other
 other:
-  website_version: 4.1.1-alpha
+  website_version: 4.2.1-alpha
   
   use_database: false
   db_in_env:

@@ -4,3 +4,6 @@ vendor/
 # composer.lock
 test/test.php
 .env
+backend/db/database.db
+public/public_data/*
+!public/public_data/.gitkeep
