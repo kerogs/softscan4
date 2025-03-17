@@ -5,5 +5,7 @@ vendor/
 test/test.php
 .env
 backend/db/database.db
+backend/db/tree.db
+backend/db/statistics.db
 public/public_data/*
 !public/public_data/.gitkeep
